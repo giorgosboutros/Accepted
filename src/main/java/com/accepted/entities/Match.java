@@ -17,6 +17,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="match")
@@ -25,21 +27,25 @@ public class Match {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank(message= "Description cannot be empty.")
     private String description;
 
+    @NotNull(message= "Match date cannot be empty")
     @Column(name= "match_date")
     private LocalDate matchDate;
 
     @Column(name="match_time")
     private LocalTime matchTime;
 
-    @Column(name= "team_a")
+    @NotNull(message= "team a cannot be null")
+    @Column(name= "team_a", nullable=false)
     private String teamA;
 
+    @NotBlank(message= "Team b cannot be empty")
     @Column(name= "team_b")
     private String teamB;
 
+    @NotNull(message= "Sport type cannot be Null")
     @Enumerated(EnumType.STRING)
     private Sport sport;
 

@@ -14,11 +14,9 @@ public class MatchDto {
     private String sport;
     private List<MatchOddsDto> matchOdds;
 
-    // Default constructor
     public MatchDto() {
     }
 
-    // Constructor with all fields
     public MatchDto(String description, LocalDate matchDate, LocalTime matchTime, String teamA, String teamB, String sport, List<MatchOddsDto> matchOdds) {
         this.description = description;
         this.matchDate = matchDate;
@@ -28,8 +26,7 @@ public class MatchDto {
         this.sport = sport;
         this.matchOdds = matchOdds;
     }
-
-    // Getters and setters
+    
     public String getDescription() {
         return description;
     }

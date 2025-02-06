@@ -1,5 +1,8 @@
 package com.accepted.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +24,6 @@ public class MatchService {
 
     public Match createMatch(MatchDto matchDto) {
         try {
-            // 1. Create and save the Match entity
             Match match = new Match();
             match.setDescription(matchDto.getDescription());
             match.setMatchDate(matchDto.getMatchDate());
@@ -31,6 +33,10 @@ public class MatchService {
             match.setSport(Match.Sport.valueOf(matchDto.getSport()));
 
             match = matchRepository.save(match);
+
+            List<MatchOdds> savedMatchOdds = new ArrayList<>();
+
+
             if (matchDto.getMatchOdds() != null) {
                 for (MatchOddsDto oddsDto : matchDto.getMatchOdds()) {
                     MatchOdds matchOdds = new MatchOdds();
@@ -38,6 +44,7 @@ public class MatchService {
                     matchOdds.setOdd(oddsDto.getOdd());
                     matchOdds.setMatch(match);
                     matchOddsRepository.save(matchOdds);
+                    savedMatchOdds.add(matchOdds);
                 }
             }
             return match;

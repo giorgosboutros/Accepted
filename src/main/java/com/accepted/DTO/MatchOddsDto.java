@@ -5,17 +5,14 @@ public class MatchOddsDto {
     private String specifier;
     private double odd;
 
-    // Default constructor
     public MatchOddsDto() {
     }
 
-    // Constructor with parameters
     public MatchOddsDto(String specifier, double odd) {
         this.specifier = specifier;
         this.odd = odd;
     }
 
-    // Getters and setters
     public String getSpecifier() {
         return specifier;
     }

@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="match_odds")
@@ -23,7 +25,9 @@ public class MatchOdds {
     @JsonBackReference
     private Match match;
 
+    @NotBlank(message= "specifier cannot be empty")
     private String specifier;
+    @Min(value= 1, message= "value must greater than 1")
     private double odd;
 
 
@@ -66,5 +70,4 @@ public class MatchOdds {
     public void setOdd(double odd){
         this.odd = odd;
     }
-
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.accepted.entities.MatchOdds;
 import com.accepted.repositories.MatchOddsRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/apiodds")
 public class MatchOddsController {
@@ -25,7 +27,7 @@ public class MatchOddsController {
     private MatchOddsRepository matchOddsRepository;
 
     @PostMapping
-    public ResponseEntity<MatchOdds> createMatchOdds(@RequestBody MatchOdds matchOdds) {
+    public ResponseEntity<MatchOdds> createMatchOdds(@Valid @RequestBody MatchOdds matchOdds) {
         return new ResponseEntity<>(matchOddsRepository.save(matchOdds), HttpStatus.CREATED);
     }
 

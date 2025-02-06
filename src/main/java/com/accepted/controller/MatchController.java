@@ -22,6 +22,8 @@ import com.accepted.repositories.MatchOddsRepository;
 import com.accepted.repositories.MatchRepository;
 import com.accepted.services.MatchService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api")
@@ -47,16 +49,12 @@ public class MatchController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createMatch(@RequestBody MatchDto matchDto) {
+    public ResponseEntity<?> createMatch(@Valid @RequestBody MatchDto matchDto) {
         try {
-            // Call service to create match and associated odds
             Match match = matchService.createMatch(matchDto);
-
-            // Return the created match as response with status 201
             return ResponseEntity.status(HttpStatus.CREATED).body(match);
 
         } catch (Exception e) {
-            // Handle exception and return error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating match");
         }
     }
